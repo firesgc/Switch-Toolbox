@@ -873,8 +873,8 @@ namespace Bfres.Structs
         public void Export(object sender, EventArgs args)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = FileFilters.FSHP; 
-            sfd.DefaultExt = ".bfobj";
+            sfd.Filter = "Models|*.gltf;";      // FileFilters.FSHP; 
+            sfd.DefaultExt = ".gltf";
             sfd.FileName = Text;
 
             if (sfd.ShowDialog() == DialogResult.OK)
@@ -889,6 +889,9 @@ namespace Bfres.Structs
                         break;
                     case ".obj":
                         OBJ.ExportMesh(sfd.FileName, this);
+                        break;
+                    case ".gltf":
+                        ASSIMP.ExportMesh(sfd.FileName, this);
                         break;
                     default:
                         DAE.Export(sfd.FileName, new DAE.ExportSettings(), this);
